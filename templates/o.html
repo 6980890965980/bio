@@ -106,6 +106,8 @@
     .avatar {
       width: 80px; height: 80px;
       border-radius: 50%; background: #444;
+      background-size: cover;      /* added */
+      background-position: center; /* added */
       margin: 0 auto 10px;
     }
 
@@ -201,7 +203,8 @@
 
     <!-- Profile Card -->
     <div class="card" id="profile-card">
-      <div class="avatar"></div>
+      <!-- Avatar now has an ID so we can set an image URL -->
+      <div class="avatar" id="avatar"></div>
       <div class="username">
         <span class="text-sparkle">fepb</span> <span>✔️</span>
       </div>
@@ -258,6 +261,11 @@
   </div>
 
   <script>
+    // *** NEW: Avatar image URL ***
+    const avatarUrl = 'https://townsquare.media/site/625/files/2016/06/drake-match-tougher-than-your-favorite-rapper.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89'; // ← replace with any image/gif URL
+    const avatarEl = document.getElementById('avatar');
+    avatarEl.style.backgroundImage = `url('${avatarUrl}')`;
+
     // assets
     const initial = document.getElementById('initial-screen');
     const main    = document.getElementById('main-content');
