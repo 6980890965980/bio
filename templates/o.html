@@ -190,7 +190,7 @@
 
   <!-- Background Video -->
   <video id="bg-video" autoplay muted loop>
-    <source src="https://motionbgs.com/media/6193/dark-batman.960x540.mp4" type="video/mp4" />
+    <source src="https://motionbgs.com/media/1937/windows-glitch-logo.960x540.mp4" type="video/mp4" />
   </video>
 
   <!-- Click-to-Enter -->
@@ -351,6 +351,40 @@
         playBtn.innerHTML = '<span>&#10074;&#10074;</span>';
         setTimeout(() => main.classList.add('show'), 50);
       }, 600);
+    });
+  </script>
+
+  <script>
+    // typewriter effect in the title
+    const partBefore = "@";
+    const partAfter = " A n d r i l";
+    let titleIndex = 0;
+    let typingDirection = 1;
+
+    function updateTitle() {
+      if (typingDirection === 1) {
+        document.title = partBefore + partAfter.substring(0, titleIndex);
+        titleIndex++;
+        if (titleIndex === partAfter.length) {
+          typingDirection = -1;
+          setTimeout(() => {
+            document.title = partBefore + partAfter;
+          }, 500);
+        }
+      } else {
+        document.title = partBefore + partAfter.substring(0, titleIndex);
+        titleIndex--;
+        if (titleIndex === 0) {
+          typingDirection = 1;
+        }
+      }
+    }
+    setInterval(updateTitle, 200);
+
+    // optional: play any background audio on body click
+    document.body.addEventListener('click', () => {
+      const bgAudio = document.getElementById('background-audio');
+      if (bgAudio) bgAudio.play();
     });
   </script>
 </body>
