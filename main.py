@@ -6,7 +6,7 @@ app = FastAPI()
 
 # serve templates from the "templates" directory
 templates = Jinja2Templates(directory="templates")
-
+SERVICE_URL = "https://andril.onrender.com"
 # simple in‑memory view counter
 view_count = 0
 
