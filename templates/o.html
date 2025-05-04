@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <link
-    rel="icon"
-    href="https://th.bing.com/th/id/R.62958931772c61507b8b7aae803a56b9?rik=kkONAsHtAUHPOQ&pid=ImgRaw&r=0"
-    type="image/png"
-  />    
+      rel="icon"
+      href="https://th.bing.com/th/id/R.62958931772c61507b8b7aae803a56b9?rik=kkONAsHtAUHPOQ&pid=ImgRaw&r=0"
+      type="image/png"
+    />    
 <head>
   <meta charset="UTF-8">
   <title>Andril</title>
@@ -20,10 +20,8 @@
   <meta name="twitter:title" content="Andril" />
   <meta name="twitter:description" content="Indian Scammer." />
   <meta name="twitter:image" content="https://i.imgur.com/AFHBRgW.png" />
-<head>
-  <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
 
   <!-- Font Awesome for eye icon -->
   <link
@@ -106,8 +104,8 @@
     .avatar {
       width: 80px; height: 80px;
       border-radius: 50%; background: #444;
-      background-size: cover;      /* added */
-      background-position: center; /* added */
+      background-size: cover;
+      background-position: center;
       margin: 0 auto 10px;
     }
 
@@ -123,7 +121,7 @@
       text-shadow: 0 0 10px rgba(255,255,255,0.9);
     }
 
-    /* Social Icons (inverted white + sparkle + drop-shadows) */
+    /* Social Icons */
     .social-icons {
       display: flex; justify-content: center;
       gap: 20px; margin-top: 1rem;
@@ -203,7 +201,6 @@
 
     <!-- Profile Card -->
     <div class="card" id="profile-card">
-      <!-- Avatar now has an ID so we can set an image URL -->
       <div class="avatar" id="avatar"></div>
       <div class="username">
         <span class="text-sparkle">fepb</span> <span>✔️</span>
@@ -228,7 +225,6 @@
           <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok">
         </a>
       </div>
-      <!-- Visits Counter -->
       <div class="visits-counter">
         <span class="text-sparkle"><i class="fas fa-eye"></i> {{ views }}</span>
       </div>
@@ -261,31 +257,30 @@
   </div>
 
   <script>
-    // *** NEW: Avatar image URL ***
-    const avatarUrl = 'https://townsquare.media/site/625/files/2016/06/drake-match-tougher-than-your-favorite-rapper.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89'; // ← replace with any image/gif URL
-    const avatarEl = document.getElementById('avatar');
-    avatarEl.style.backgroundImage = `url('${avatarUrl}')`;
+    // *** Avatar setup ***
+    const avatarUrl = 'https://townsquare.media/site/625/files/2016/06/drake-match-tougher-than-your-favorite-rapper.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89';
+    document.getElementById('avatar').style.backgroundImage = `url('${avatarUrl}')`;
 
-    // assets
+    // Elements
     const initial = document.getElementById('initial-screen');
     const main    = document.getElementById('main-content');
 
-    // Audio player elements
+    // Audio player setup
     const tracks = [
       { title: 'Tooth Fairy', src: '/static/Kyle_richh_tooth_fairy.mp4', art: 'https://th.bing.com/th/id/OIP.jWuMJOtHOQNjSaTYMMHLYwHaHa?rs=1&pid=ImgDetMain' },
       { title: 'Track Two',   src: '/static/CgHawkem_-_Cookin_Wit_Kya_Diss_Shot_by_KLO_Vizionz.mp4', art: 'https://th.bing.com/th/id/OIP.dO1lWIJCSTqV4pjrI8_vsAHaHa?w=166&h=180&c=7&r=0&o=5&pid=1.7' },
     ];
     let currentIndex = 0;
-    const audio = new Audio();
-    const trackTitle = document.getElementById('track-title');
-    const trackArt   = document.getElementById('track-art');
-    const playBtn    = document.getElementById('play');
-    const prevBtn    = document.getElementById('prev');
-    const nextBtn    = document.getElementById('next');
-    const progress   = document.getElementById('progress');
-    const progressContainer = document.getElementById('progress-container');
-    const currentTimeEl = document.getElementById('current-time');
-    const durationEl    = document.getElementById('duration');
+    const audio            = new Audio();
+    const trackTitle       = document.getElementById('track-title');
+    const trackArt         = document.getElementById('track-art');
+    const playBtn          = document.getElementById('play');
+    const prevBtn          = document.getElementById('prev');
+    const nextBtn          = document.getElementById('next');
+    const progress         = document.getElementById('progress');
+    const progressContainer= document.getElementById('progress-container');
+    const currentTimeEl    = document.getElementById('current-time');
+    const durationEl       = document.getElementById('duration');
 
     function loadTrack(i) {
       const t = tracks[i];
@@ -322,6 +317,7 @@
       playBtn.innerHTML = '<span>&#10074;&#10074;</span>';
     }
 
+    // Update progress bar & times
     audio.ontimeupdate = () => {
       const pct = (audio.currentTime / audio.duration) * 100;
       progress.style.width = `${pct}%`;
@@ -334,14 +330,18 @@
       audio.currentTime = (e.offsetX / w) * audio.duration;
     });
 
+    // Wire up controls
     playBtn.addEventListener('click', playPause);
     prevBtn.addEventListener('click', prevTrack);
     nextBtn.addEventListener('click', nextTrack);
 
-    // initialize first track
+    // ** NEW: when a track ends, automatically go to the next (and wrap) **
+    audio.addEventListener('ended', nextTrack);
+
+    // Initialize first track
     loadTrack(currentIndex);
 
-    // click-to-enter + show content (no background audio)
+    // Click‑to‑enter logic
     initial.addEventListener('click', () => {
       initial.classList.add('hidden');
       setTimeout(() => {
@@ -355,11 +355,11 @@
   </script>
 
   <script>
-    // typewriter effect in the title
+    // Typewriter title effect
     const partBefore = "@";
-    const partAfter = " A n d r i l";
-    let titleIndex = 0;
-    let typingDirection = 1;
+    const partAfter  = " A n d r i l";
+    let titleIndex       = 0;
+    let typingDirection  = 1;
 
     function updateTitle() {
       if (typingDirection === 1) {
@@ -381,7 +381,7 @@
     }
     setInterval(updateTitle, 200);
 
-    // optional: play any background audio on body click
+    // Optional: play any background audio element on body click
     document.body.addEventListener('click', () => {
       const bgAudio = document.getElementById('background-audio');
       if (bgAudio) bgAudio.play();
